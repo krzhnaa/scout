@@ -1,0 +1,26 @@
+# zip archives - never commit these
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Environment secrets - never commit
+.env
+.env.local
+*.env
+
+# Backend generated files
+reports/*.pdf
+
+# Node / frontend
+node_modules/
+dist/
+.vite/
+
+# Editor/OS junk
+.vscode/
+.DS_Store
+Thumbs.db

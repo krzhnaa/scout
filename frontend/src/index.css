@@ -1,0 +1,664 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   SCOUT — GLOBAL
+   ========================================================= */
+
+:root {
+  color-scheme: dark;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  background: #05070d;
+}
+
+body {
+  min-width: 320px;
+  background:
+    radial-gradient(
+      900px 500px at 10% -10%,
+      rgba(91, 76, 255, 0.16),
+      transparent 65%
+    ),
+    radial-gradient(
+      800px 500px at 95% 5%,
+      rgba(0, 214, 255, 0.09),
+      transparent 62%
+    ),
+    radial-gradient(
+      700px 500px at 50% 110%,
+      rgba(124, 58, 237, 0.08),
+      transparent 65%
+    ),
+    #05070d;
+
+  color: #eef2ff;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: rgba(124, 92, 255, 0.35);
+  color: white;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.38);
+}
+
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.scout-grid {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    );
+
+  background-size: 44px 44px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    rgba(0, 0, 0, 0.8) 65%,
+    transparent 100%
+  );
+}
+
+.scout-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   GLASS
+   ========================================================= */
+
+.glass {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.085);
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.glass-soft {
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* =========================================================
+   GLOW
+   ========================================================= */
+
+.scout-glow {
+  box-shadow:
+    0 0 0 1px rgba(124, 92, 255, 0.14),
+    0 0 70px rgba(91, 76, 255, 0.12),
+    0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.scout-text-glow {
+  text-shadow:
+    0 0 30px rgba(124, 92, 255, 0.35);
+}
+
+/* =========================================================
+   ANIMATED ORBS
+   ========================================================= */
+
+.scout-orb {
+  position: fixed;
+  width: 520px;
+  height: 520px;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(100px);
+  opacity: 0.14;
+  z-index: 0;
+}
+
+.scout-orb-purple {
+  top: -280px;
+  left: -180px;
+  background: #6747ff;
+  animation: orbFloatOne 16s ease-in-out infinite;
+}
+
+.scout-orb-cyan {
+  top: 15%;
+  right: -300px;
+  background: #00d9ff;
+  opacity: 0.07;
+  animation: orbFloatTwo 19s ease-in-out infinite;
+}
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.scout-input {
+  width: 100%;
+  color: #f8fafc;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.085);
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.scout-input::placeholder {
+  color: rgba(148, 163, 184, 0.42);
+}
+
+.scout-input:hover {
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.scout-input:focus {
+  border-color: rgba(124, 92, 255, 0.62);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(124, 92, 255, 0.045),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  box-shadow:
+    0 0 0 3px rgba(124, 92, 255, 0.08),
+    0 0 40px rgba(91, 76, 255, 0.08);
+}
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.scout-button {
+  position: relative;
+  overflow: hidden;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #715cff 0%,
+      #5a46e8 45%,
+      #4934cf 100%
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 10px 35px rgba(91, 76, 255, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.scout-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.16) 48%,
+      transparent 72%
+    );
+
+  transform: translateX(-120%);
+  transition: transform 650ms ease;
+}
+
+.scout-button:hover::before {
+  transform: translateX(120%);
+}
+
+.scout-button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 14px 45px rgba(91, 76, 255, 0.32),
+    0 0 30px rgba(91, 76, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.scout-button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.scout-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  transform: none;
+}
+
+/* =========================================================
+   STATUS DOT
+   ========================================================= */
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+
+  background: #38f2a5;
+
+  box-shadow:
+    0 0 0 4px rgba(56, 242, 165, 0.08),
+    0 0 18px rgba(56, 242, 165, 0.6);
+
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+/* =========================================================
+   SCAN LINE
+   ========================================================= */
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(124, 92, 255, 0.8),
+      rgba(0, 220, 255, 0.5),
+      transparent
+    );
+
+  opacity: 0;
+
+  animation: scan 4s linear infinite;
+}
+
+/* =========================================================
+   SKELETON
+   ========================================================= */
+
+.skeleton {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 20%,
+      rgba(255, 255, 255, 0.08) 40%,
+      rgba(255, 255, 255, 0.035) 60%
+    );
+
+  background-size: 500px 100%;
+
+  animation: skeletonShimmer 1.7s linear infinite;
+}
+
+/* =========================================================
+   CODE / MONO
+   ========================================================= */
+
+.mono {
+  font-family:
+    "JetBrains Mono",
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes orbFloatOne {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  35% {
+    transform: translate(120px, 80px) scale(1.08);
+  }
+
+  70% {
+    transform: translate(40px, 160px) scale(0.94);
+  }
+}
+
+@keyframes orbFloatTwo {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  45% {
+    transform: translate(-120px, 70px) scale(1.12);
+  }
+
+  75% {
+    transform: translate(-50px, -80px) scale(0.96);
+  }
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.75;
+  }
+
+  80% {
+    opacity: 0.25;
+  }
+
+  100% {
+    transform: translateY(420px);
+    opacity: 0;
+  }
+}
+
+@keyframes skeletonShimmer {
+  from {
+    background-position: -500px 0;
+  }
+
+  to {
+    background-position: 500px 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade {
+  animation: fadeIn 400ms ease both;
+}
+
+.animate-scale {
+  animation: scaleIn 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-spin-scout {
+  animation: spin 850ms linear infinite;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .scout-orb {
+    width: 360px;
+    height: 360px;
+    filter: blur(80px);
+  }
+
+  .scout-grid {
+    background-size: 32px 32px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Rebel hologram terminal skin */
+body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; background-color: #05070d; background-image: radial-gradient(circle at 20% 20%, rgba(75,213,238,.045), transparent 28%), radial-gradient(circle at 80% 0%, rgba(59,130,246,.035), transparent 30%), repeating-radial-gradient(circle at 10% 20%, rgba(159,242,255,.18) 0 1px, transparent 1px 80px); }
+.scout-grid { opacity: .48; background-image: linear-gradient(rgba(75,213,238,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(75,213,238,.06) 1px, transparent 1px); }
+.glass, .glass-soft { border-radius: 0 !important; border: 2px solid rgba(75,213,238,.34); background: linear-gradient(135deg, rgba(4,34,43,.72), rgba(5,7,13,.9)); box-shadow: inset 0 0 0 1px rgba(159,242,255,.06), 0 0 28px rgba(8,145,178,.12); backdrop-filter: none; }
+.glass::before { content: ""; position: absolute; inset: 5px; pointer-events: none; border-top: 1px solid rgba(159,242,255,.16); border-bottom: 1px solid rgba(159,242,255,.1); }
+.scout-button { border-radius: 0 !important; border: 2px solid #9ff2ff; color: #eafcff; background: #04222b; box-shadow: 4px 4px 0 #0891b2, 0 0 10px rgba(75,213,238,.25); font-family: "Press Start 2P", monospace; text-transform: uppercase; letter-spacing: .04em; }
+.scout-button:hover { transform: translate(-1px,-1px); filter: brightness(1.18); box-shadow: 5px 5px 0 #3b82f6, 0 0 28px rgba(75,213,238,.72); }
+.scout-button:active { transform: scale(.97); box-shadow: 1px 1px 0 #0891b2, inset 2px 2px 0 rgba(0,0,0,.35); }
+.scout-input { border-radius: 0 !important; border: 2px solid rgba(75,213,238,.36); background: rgba(4,34,43,.6); }
+.scout-input:focus { border-color: #9ff2ff; box-shadow: 0 0 0 2px rgba(75,213,238,.18), 0 0 20px rgba(75,213,238,.2); }
+.pixel-label { font-family: inherit; letter-spacing: .08em; }
+.scanlines { position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: .045; background: repeating-linear-gradient(0deg, transparent, transparent 2px, #9ff2ff 3px); }
+.holo-frame { position: relative; border: 2px solid #4bd5ee; border-radius: 0; box-shadow: 0 0 30px rgba(75,213,238,.18), inset 0 0 24px rgba(8,145,178,.08); }
+.holo-frame::before, .holo-frame::after { content: ""; position: absolute; width: 18px; height: 18px; border-color: #9ff2ff; pointer-events: none; }
+.holo-frame::before { left: -2px; top: -2px; border-left: 4px solid; border-top: 4px solid; }
+.holo-frame::after { right: -2px; bottom: -2px; border-right: 4px solid; border-bottom: 4px solid; }
+.terminal-warning { color: #fcd000; font-family: "Press Start 2P", monospace; font-size: 8px; }
+.mission-node { border-radius: 0 !important; border: 2px solid rgba(75,213,238,.45); }
+.empire-alert { border: 2px solid #ff3b3b; background: rgba(127,29,29,.42); animation: flicker .6s linear both; }
+[role="dialog"] > .glass { position: relative; border: 3px solid #4bd5ee; border-radius: 0 !important; box-shadow: 0 0 34px rgba(75,213,238,.32), inset 0 0 30px rgba(8,145,178,.12); }
+[role="dialog"] > .glass::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .05; background: repeating-linear-gradient(0deg, transparent, transparent 2px, #9ff2ff 3px); }
+ h1, h2, h3, h4 { font-family: Audiowide, Orbitron, sans-serif; }
+nav > div:first-child > div:last-child > div:first-child { font-family: Audiowide, Orbitron, sans-serif; }
+h1, h2, h3, h4 { text-shadow: 0 0 14px rgba(75,213,238,.38); }
+nav { border-bottom: 1px solid rgba(75,213,238,.35); padding-bottom: 14px; }
+.glass [class*="rounded-full"], .glass [class*="rounded-xl"], .glass [class*="rounded-lg"] { border-radius: 0; }
+
+/* Cinematic saber accents: blue for the Rebel interface, red as a distant threat. */
+body::before, body::after { content: ""; position: fixed; z-index: 0; width: 46vw; height: 2px; pointer-events: none; opacity: .3; filter: blur(.2px); transform: rotate(-24deg); }
+body::before { left: -13vw; top: 20vh; background: #55dfff; box-shadow: 0 0 7px #eafcff, 0 0 24px #0891b2, 0 0 60px #3b82f6; }
+body::after { right: -22vw; bottom: 16vh; background: #ff5353; box-shadow: 0 0 7px #ffd2d2, 0 0 24px #ff3b3b, 0 0 60px #7f1d1d; }
+.scout-orb { opacity: .06; }.scout-orb-cyan { opacity: .035; }
+.scout-button { font-family: inherit; border-color: #6ee7ff; background: linear-gradient(135deg, #062f42, #084c68); box-shadow: 3px 3px 0 #075a79, 0 0 16px rgba(75,213,238,.38); }
+.scout-button:hover { box-shadow: 4px 4px 0 #1d4ed8, 0 0 30px rgba(75,213,238,.9); }
+.corner-companion { width: 134px; height: 54px; overflow: visible; }
+/* The artwork has transparent space under the character; this offset pins the visible art to the viewport corner. */
+.corner-companion img { position: absolute; right: 0; bottom: -42px; display: block; width: 134px; max-width: none; filter: drop-shadow(0 0 5px rgba(255,255,255,.9)) drop-shadow(0 0 13px rgba(255,255,255,.38)); }
+.corner-companion-bubble { position: absolute; right: 18px; bottom: 58px; width: max-content; max-width: 180px; padding: 10px 12px; border: 1px solid rgba(255,255,255,.85); border-radius: 12px; background: rgba(5,7,13,.94); color: #fff; font: 600 12px Inter, sans-serif; line-height: 1.35; opacity: 0; transform: translateY(5px); pointer-events: none; transition: opacity 160ms ease, transform 160ms ease; box-shadow: 0 0 13px rgba(255,255,255,.28); }
+.corner-companion-bubble::after { content: ""; position: absolute; right: 20px; bottom: -6px; width: 10px; height: 10px; background: rgba(5,7,13,.94); border-right: 1px solid rgba(255,255,255,.85); border-bottom: 1px solid rgba(255,255,255,.85); transform: rotate(45deg); }
+.corner-companion:hover .corner-companion-bubble { opacity: 1; transform: translateY(0); }
+
+/* Blue Rebel controls meet a distant red Empire glow.  The red is deliberately
+   contained to the lower-right so it adds drama without tinting the workspace. */
+body {
+  background-image:
+    radial-gradient(720px 540px at 100% 100%, rgba(220, 38, 54, .18), transparent 58%),
+    radial-gradient(380px 300px at 100% 100%, rgba(255, 82, 82, .10), transparent 45%),
+    radial-gradient(circle at 20% 20%, rgba(75, 213, 238, .045), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(59, 130, 246, .035), transparent 30%),
+    repeating-radial-gradient(circle at 10% 20%, rgba(159, 242, 255, .18) 0 1px, transparent 1px 80px);
+}
+
+body::after {
+  right: -17vw;
+  bottom: 11vh;
+  width: 54vw;
+  opacity: .46;
+  background: linear-gradient(90deg, transparent 0%, #ff4b55 32%, #fff0f0 50%, #ff4b55 68%, transparent 100%);
+  box-shadow: 0 0 7px #fff0f0, 0 0 24px #ff3b3b, 0 0 82px rgba(185, 28, 28, .9);
+}
+
+.saber-mark {
+  border-color: rgba(125, 211, 252, .38) !important;
+  box-shadow: 0 0 18px rgba(56, 189, 248, .24), inset -4px -4px 12px rgba(239, 68, 68, .08);
+}
+
+.saber-badge {
+  box-shadow: inset 0 0 18px rgba(56, 189, 248, .06), 10px 0 26px rgba(239, 68, 68, .04);
+}
+
+.saber-title {
+  text-shadow: -8px 0 28px rgba(56, 189, 248, .25), 8px 0 28px rgba(239, 68, 68, .20);
+}
+
+.scout-glow {
+  box-shadow: 0 0 0 1px rgba(75, 213, 238, .26), 0 0 58px rgba(8, 145, 178, .12), 28px 28px 80px rgba(127, 29, 29, .11), 0 24px 80px rgba(0, 0, 0, .28);
+}
+
+.glass {
+  border-color: rgba(75, 213, 238, .38);
+  background: linear-gradient(135deg, rgba(4, 34, 43, .78), rgba(5, 7, 13, .92) 68%, rgba(62, 10, 18, .50));
+}
+
+@media (max-width: 640px) {
+  body { background-image: radial-gradient(440px 340px at 100% 100%, rgba(220, 38, 54, .16), transparent 60%), radial-gradient(circle at 20% 20%, rgba(75, 213, 238, .045), transparent 28%), #05070d; }
+  body::after { right: -35vw; bottom: 8vh; width: 90vw; opacity: .32; }
+}
+    

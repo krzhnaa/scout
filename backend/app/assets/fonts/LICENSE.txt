@@ -1,0 +1,3 @@
+Liberation Fonts are licensed under the SIL Open Font License, Version 1.1.
+Bundled here so the PDF report renders identically on every machine, since
+these fonts are not guaranteed to be pre-installed on Windows/Mac.
