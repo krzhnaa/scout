@@ -67,11 +67,8 @@ class Settings:
         if value.strip()
     }
 
-    SMTP_HOST = os.getenv("SMTP_HOST", "").strip()
-    SMTP_PORT = _int_env("SMTP_PORT", 587, minimum=1)
-    SMTP_USERNAME = os.getenv("SMTP_USERNAME", "").strip()
-    SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
-    SMTP_FROM = os.getenv("SMTP_FROM", "").strip()
+    BREVO_API_KEY = os.getenv("BREVO_API_KEY", "").strip()
+    EMAIL_FROM = os.getenv("EMAIL_FROM", "").strip()
 
     # =========================================================
     # Anakin
