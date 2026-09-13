@@ -78,28 +78,59 @@ def _build_text(transaction: dict[str, Any]) -> str:
         f"completed an external purchase or booking."
     )
 
+async def send_demo_confirmation(
+    recipient: str,
+    transaction: dict[str, Any],
+) -> None:
+    if not settings.BREVO_API_KEY:
+        raise RuntimeError("BREVO_API_KEY is missing")
 
-async def send_demo_confirmation(recipient: str, transaction: dict[str, Any]) -> None:
-    if not settings.BREVO_API_KEY or not settings.EMAIL_FROM:
-        raise RuntimeError("Brevo email is not configured (BREVO_API_KEY / EMAIL_FROM missing).")
+    if not settings.EMAIL_FROM:
+        raise RuntimeError("EMAIL_FROM is missing")
 
     payload = {
-        "sender": {"email": settings.EMAIL_FROM, "name": "Scout"},
-        "to": [{"email": recipient}],
+        "sender": {
+            "email": settings.EMAIL_FROM,
+            "name": "Scout",
+        },
+        "to": [
+            {
+                "email": recipient,
+            }
+        ],
         "subject": "Scout — Demo Transaction Confirmation",
         "htmlContent": _build_html(transaction),
         "textContent": _build_text(transaction),
     }
 
+    print("BREVO DEBUG: attempting email")
+    print(f"BREVO DEBUG: sender={settings.EMAIL_FROM}")
+    print(f"BREVO DEBUG: recipient={recipient}")
+    print("BREVO DEBUG: API key present=", bool(settings.BREVO_API_KEY))
+
     async with httpx.AsyncClient(timeout=15) as client:
-        response = await client.post(
-            "https://api.brevo.com/v3/smtp/email",
-            headers={
-                "api-key": settings.BREVO_API_KEY,
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            json=payload,
-        )
+        try:
+            response = await client.post(
+                "https://api.brevo.com/v3/smtp/email",
+                headers={
+                    "api-key": settings.BREVO_API_KEY,
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                json=payload,
+            )
+
+            print("BREVO DEBUG: status=", response.status_code)
+            print("BREVO DEBUG: response=", response.text[:1000])
+
+        except Exception as exc:
+            print("BREVO DEBUG: HTTP REQUEST FAILED")
+            print("BREVO DEBUG:", repr(exc))
+            raise
+
         if response.status_code >= 400:
-            raise RuntimeError(f"Brevo HTTP {response.status_code}: {response.text[:500]}")
+            raise RuntimeError(
+                f"Brevo HTTP {response.status_code}: {response.text[:1000]}"
+            )
+
+    print("BREVO DEBUG: email accepted by Brevo")
